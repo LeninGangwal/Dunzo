@@ -1,8 +1,6 @@
 package Models;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
-
 import java.util.HashMap;
 
 @Getter
@@ -14,5 +12,6 @@ public class Machine {
     private HashMap<String, Integer> ingredientQuantityMap;
 
     @JsonProperty("beverages")
+//    private ArrayList<Pair> beverages;
     private HashMap<String, HashMap<String, Integer>> beverages;
 }

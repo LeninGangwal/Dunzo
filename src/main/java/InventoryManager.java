@@ -1,28 +1,30 @@
-//import Models.Models.Beverage;
 import Models.Beverage;
-
 import java.util.HashMap;
 import java.util.Map;
 
+/**This is a thread-safe singleton implementation for an inventory management system.
+ * This class takes care of handling all the inventory.*/
+
 public class InventoryManager {
-    //singleton
-    static InventoryManager inventoryManager;
+    private static InventoryManager inventoryManager;
     private HashMap <String, Integer> inventory = new HashMap<>();
     private InventoryManager(){
+    }
 
+    //Using Holder pattern ensures thread safe initialisation of the object,
+    private static class InventoryManagerHolder {
+        public static final InventoryManager instance = new InventoryManager();
     }
 
     public static InventoryManager getInstance(){
-        if (inventoryManager == null) {
-           inventoryManager = new InventoryManager();
-        }
-        return inventoryManager;
+        return InventoryManagerHolder.instance;
     }
 
-     synchronized boolean checkAndUpdateIfEnoughInventory(Beverage beverage){
-        System.out.println(Thread.currentThread().getId());
+    //Making this thread safe by synchronizing
+     synchronized boolean checkAndUpdateIfEnoughInventoryForBeverage(Beverage beverage){
         Map<String, Integer> requiredIngredientMap = beverage.getIngredientQuantityMap();
         boolean isPossible = true;
+
         for (String ingredient : requiredIngredientMap.keySet()) {
             int ingredientInventoryCount = inventory.getOrDefault(ingredient, -1);
             if (ingredientInventoryCount == -1 || ingredientInventoryCount == 0) {
@@ -43,12 +45,19 @@ public class InventoryManager {
                  inventory.put(ingredient,  existingInventory - requiredIngredientMap.get(ingredient));
              }
         }
+
          return isPossible;
      }
 
      void addInventory(String ingredient, int quantity){
         int existingInventory = inventory.getOrDefault(ingredient, 0);
         inventory.put(ingredient,  existingInventory + quantity);
+     }
+
+     //Used only for testing
+     void resetInventory(){
+         for (String ingredient : inventory.keySet())
+             inventory.put(ingredient,  0);
      }
 
 
