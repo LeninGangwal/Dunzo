@@ -11,10 +11,14 @@ import java.util.Map;
 import static java.lang.Thread.sleep;
 
 /**
- * Assumptions ->
+ * Assumptions:
  * 1) The input JSON will not have duplicate beverage names. (Workaround would be to use MultiMap, custom deserialiser. Skipping it as it might be out of scope given time constraints)
  * 2) The input JSON contains correct input. Keeping check on the range of values seems to be out of scope given time constraints(Workaround would be add  javax validations in the input Models itself).
  *
+ * Algorithm:
+ * A multithreaded system with n threads is invoked to represent n nozzled coffee machine.
+ * It queues up all the requests from the input and tries to create the beverages. Importance has been given to thread safety to ensure two drinks do not use same ingredient.
+ * Feature to add new ingredient in our inventory is given, as well as to add new Beverage Requests at any given point of time.
  */
 public class App {
     /*Running test cases*/
@@ -57,7 +61,7 @@ public class App {
 
        coffeeMachine.addBeverageRequest(beverage);
 
-       sleep(1000);
+       sleep(2000);
        System.out.println("Adding vodka inventory");
        InventoryManager.getInstance().addInventory("vodka", 100);
        coffeeMachine.addBeverageRequest(beverage);
@@ -87,7 +91,7 @@ public class App {
         return coffeeMachine;
     }
 
-//Resetting inventory and stopping coffee machine.
+/**Resetting inventory and stopping coffee machine. This is only used for testing. In real world, no need for resetting unless machine is stopped.*/
     public static void reset(CoffeeMachine coffeeMachine) throws Exception{
         sleep(3000);       //Sleeping to ensure threads are finished. Just for testing.
         System.out.println("Resetting\n\n");

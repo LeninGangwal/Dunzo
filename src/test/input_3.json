@@ -1,7 +1,7 @@
 {
   "machine": {
     "outlets": {
-      "count_n": 3
+      "count_n": 4
     },
     "total_items_quantity": {
       "hot_water": 10,
@@ -22,14 +22,14 @@
       },
       "D": {
         "hot_water": 2,
-        "hot_milk": 1
+        "hot_milk": 2
       },
       "E": {
-        "hot_water": 4,
+        "hot_water": 1,
         "hot_milk": 1
       },
       "F": {
-        "hot_water": 4,
+        "hot_water": 2,
         "hot_milk": 1
       },
       "NO_INGREDIENT_DRINK": {
