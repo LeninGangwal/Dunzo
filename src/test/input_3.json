@@ -13,7 +13,7 @@
         "hot_milk": 1
       },
       "B": {
-        "hot_water": 2,
+        "hot_water": 4,
         "hot_milk": 2
       },
       "C": {
@@ -21,7 +21,7 @@
         "hot_milk": 3
       },
       "D": {
-        "hot_water": 4,
+        "hot_water": 2,
         "hot_milk": 1
       },
       "E": {
@@ -31,6 +31,8 @@
       "F": {
         "hot_water": 4,
         "hot_milk": 1
+      },
+      "NO_INGREDIENT_DRINK": {
       }
     }
   }

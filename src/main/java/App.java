@@ -14,24 +14,27 @@ import static java.lang.Thread.sleep;
  * Assumptions ->
  * 1) The input JSON will not have duplicate beverage names. (Workaround would be to use MultiMap, custom deserialiser. Skipping it as it might be out of scope given time constraints)
  * 2) The input JSON contains correct input. Keeping check on the range of values seems to be out of scope given time constraints(Workaround would be add  javax validations in the input Models itself).
- * 3)
+ *
  */
 public class App {
     /*Running test cases*/
     public static void main(String[] args) throws Exception {
 
         String jsonInput = "";
-
-        jsonInput = new String(Files.readAllBytes(Paths.get("/Users/lenin.gangwal/Documents/Projects/DunzoAssignment/src/test/input.json")));
+        //Test Case->Sample Input
+        jsonInput = new String(Files.readAllBytes(Paths.get("src/test/input.json")));
         run(jsonInput);
 
-        jsonInput = new String(Files.readAllBytes(Paths.get("/Users/lenin.gangwal/Documents/Projects/DunzoAssignment/src/test/input_2.json")));
+        //Test Case -> No ingredients provided
+        jsonInput = new String(Files.readAllBytes(Paths.get("src/test/input_2.json")));
         run(jsonInput);
 
-        jsonInput = new String(Files.readAllBytes(Paths.get("/Users/lenin.gangwal/Documents/Projects/DunzoAssignment/src/test/input_3.json")));
+        //Test Case -> Multiple Beverages competing for finish, also a beverage without any ingredient
+        jsonInput = new String(Files.readAllBytes(Paths.get("src/test/input_3.json")));
         run(jsonInput);
 
-        jsonInput = new String(Files.readAllBytes(Paths.get("/Users/lenin.gangwal/Documents/Projects/DunzoAssignment/src/test/input.json")));
+        //Test Case -> After processing the input beverages, an inventory is added manually, and then another beverage request is added.
+        jsonInput = new String(Files.readAllBytes(Paths.get("src/test/input.json")));
         runWithInventoryInwarding(jsonInput);
 
 
@@ -42,7 +45,7 @@ public class App {
         reset(coffeeMachine);
     }
 
-//Adds inventory in the running machine, and then retires a beverage
+//Adds inventory in the running machine, and then retries a beverage
     public static void runWithInventoryInwarding(String jsonInput) throws Exception {
        CoffeeMachine coffeeMachine = initialiseMachine(jsonInput);
        System.out.println("Adding request for pina_colada");
@@ -86,7 +89,7 @@ public class App {
 
 //Resetting inventory and stopping coffee machine.
     public static void reset(CoffeeMachine coffeeMachine) throws Exception{
-        sleep(3000);       //Sleeping to ensure threads are finished. Just for testing. S
+        sleep(3000);       //Sleeping to ensure threads are finished. Just for testing.
         System.out.println("Resetting\n\n");
         coffeeMachine.stopMachine();
         InventoryManager.getInstance().resetInventory();
