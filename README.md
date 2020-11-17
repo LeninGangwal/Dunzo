@@ -1,4 +1,4 @@
-# Dunzo interview assignment
+### Clean working code with Multithreading and Unit Tests for Dunzo interview assignment
 
 Write the working code to create a working coffee machine. Here are the desired features
 1. It will be serving some beverages.
@@ -18,4 +18,4 @@ some methods to refill them.
 10.Please provide functional integration test cases for maximum coverage.
 
 
-### I wrote this code with Multithreading and Unit Tests.
+### Buy me a coffee if you get in Dunzo using this.
